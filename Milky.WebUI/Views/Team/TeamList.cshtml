@@ -1,0 +1,40 @@
+@model List<TeamResultDto>
+@{
+    ViewData["Title"] = "TeamList";
+    Layout = "_LayoutAdmin";
+    int count = 0;
+}
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-bordered">
+        <h3>EKİP LİSTESİ</h3>
+        <hr>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Ad Soyad</th>
+                <th>Departman</th>
+                <th colspan="3"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>@count</td>
+                    <td>@item.TeamFullname</td>
+                    <td>@item.TeamDepartment</td>
+                    <td><a class="btn btn-outline-success" asp-controller="SocialMedia" asp-action="SocialMediaList" asp-route-id="@item.TeamId">Sosyal Medya</a></td>
+                    <td><a class="btn btn-outline-warning" asp-controller="Team" asp-action="TeamUpdate" asp-route-id="@item.TeamId">Güncelle</a></td>
+                    <td><a class="btn btn-outline-danger" asp-controller="Team" asp-action="TeamDelete" asp-route-id="@item.TeamId">Sil</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else
+{
+    <div class="alert alert-warning">Kayıt bulunmuyor</div>
+}
+<a class="btn btn-outline-info" asp-controller="Team" asp-action="TeamCreate">Yeni Oluştur</a>

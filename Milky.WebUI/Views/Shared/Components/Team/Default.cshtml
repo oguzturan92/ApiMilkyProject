@@ -1,0 +1,35 @@
+@model List<TeamSocialMediaResultDto>
+
+@if (Model.Count() > 0)
+{
+    <!-- Team Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <p class="section-title bg-white text-center text-primary px-3">EKİBİMİZ</p>
+                <h1 class="mb-5">Deneyimli Ekip Üyelerimiz</h1>
+            </div>
+            <div class="row g-4">
+                @{int a = 1;}
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.@(a)s">
+                        <div class="team-item rounded p-4">
+                            <img class="img-fluid rounded mb-4" src="@Model[i].TeamImage" alt="">
+                            <h5>@Model[i].TeamFullname</h5>
+                            <p class="text-primary">@Model[i].TeamDepartment</p>
+                            <div class="d-flex justify-content-center">
+                                @foreach (var item in Model[i].SocialMedias)
+                                {
+                                    <a class="btn btn-square btn-outline-secondary rounded-circle mx-1" href="@item.SocialMediaLink" target="_blank">@Html.Raw(item.SocialMediaIcon)</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    a += 2;
+                }
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+}

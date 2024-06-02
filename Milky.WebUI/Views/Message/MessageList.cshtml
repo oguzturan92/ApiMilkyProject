@@ -1,0 +1,38 @@
+@model List<MessageResultDto>
+@{
+    ViewData["Title"] = "MessageList";
+    Layout = "_LayoutAdmin";
+    int count = 0;
+}
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-bordered">
+        <h3>MESAJ LİSTESİ</h3>
+        <hr>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Tarih</th>
+                <th>Mail</th>
+                <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>@count</td>
+                    <td>@item.MessageDate</td>
+                    <td>@item.MessageMail</td>
+                    <td><a class="btn btn-outline-warning" asp-controller="Message" asp-action="MessageUpdate" asp-route-id="@item.MessageId">Detay</a></td>
+                    <td><a class="btn btn-outline-danger" asp-controller="Message" asp-action="MessageDelete" asp-route-id="@item.MessageId">Sil</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else
+{
+    <div class="alert alert-warning">Kayıt bulunmuyor</div>
+}

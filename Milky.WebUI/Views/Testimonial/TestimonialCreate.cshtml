@@ -1,0 +1,33 @@
+@model TestimonialCreateDto
+@{
+    ViewData["Title"] = "TestimonialCreate";
+    Layout = "_LayoutAdmin";
+}
+
+<form asp-controller="Testimonial" asp-action="TestimonialCreate" method="post">
+    <h3>MÜŞTERİ YORUMU EKLE</h3>
+    <hr>
+    <div class="form-group">
+        <label>Ad Soyad</label>
+        <input type="text" asp-for="TestimonialFullname" class="form-control">
+        <span asp-validation-for="TestimonialFullname" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Yorum</label>
+        <input type="text" asp-for="TestimonialComment" class="form-control">
+        <span asp-validation-for="TestimonialComment" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Departman</label>
+        <input type="text" asp-for="TestimonialDepartment" class="form-control">
+        <span asp-validation-for="TestimonialDepartment" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Resim</label>
+        <input type="text" asp-for="TestimonialImage" class="form-control">
+        <span asp-validation-for="TestimonialImage" class="text-danger"></span>
+    </div>
+    <hr>
+    <button type="submit" class="btn btn-info">Kaydet</button>
+    <a class="btn btn-outline-dark" asp-controller="Testimonial" asp-action="TestimonialList">Geri</a>
+</form>

@@ -1,0 +1,37 @@
+@model List<BannerResultDto>
+@{
+    ViewData["Title"] = "BannerList";
+    Layout = "_LayoutAdmin";
+    int count = 0;
+}
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-bordered">
+        <h3>BANNER LİSTESİ</h3>
+        <hr>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Başlık</th>
+                <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>@count</td>
+                    <td>@item.BannerTitle</td>
+                    <td><a class="btn btn-outline-warning" asp-controller="Banner" asp-action="BannerUpdate" asp-route-id="@item.BannerId">Güncelle</a></td>
+                    <td><a class="btn btn-outline-danger" asp-controller="Banner" asp-action="BannerDelete" asp-route-id="@item.BannerId">Sil</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else
+{
+    <div class="alert alert-warning">Kayıt bulunmuyor</div>
+}
+<a class="btn btn-outline-info" asp-controller="Banner" asp-action="BannerCreate">Yeni Oluştur</a>

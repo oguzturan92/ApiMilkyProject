@@ -1,0 +1,34 @@
+@model AddressUpdateDto
+@{
+    ViewData["Title"] = "AddressUpdate";
+    Layout = "_LayoutAdmin";
+}
+
+<form asp-controller="Address" asp-action="AddressUpdate" method="post">
+    <h3>ADRES GÜNCELLE</h3>
+    <hr>
+    <input type="hidden" asp-for="AddressId">
+    <div class="form-group">
+        <label>Adres</label>
+        <input type="text" asp-for="AddressContent" class="form-control">
+        <span asp-validation-for="AddressContent" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Telefon Numarası</label>
+        <input type="text" asp-for="AddressPhone" class="form-control">
+        <span asp-validation-for="AddressPhone" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Mail</label>
+        <input type="text" asp-for="AddressMail" class="form-control">
+        <span asp-validation-for="AddressMail" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Harita Url</label>
+        <input type="text" asp-for="AddressMapUrl" class="form-control">
+        <span asp-validation-for="AddressMapUrl" class="text-danger"></span>
+    </div>
+    <hr>
+    <button type="submit" class="btn btn-warning">Kaydet</button>
+    <a class="btn btn-outline-dark" asp-controller="Address" asp-action="AddressList">Geri</a>
+</form>

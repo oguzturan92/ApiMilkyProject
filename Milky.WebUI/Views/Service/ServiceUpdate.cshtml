@@ -1,0 +1,29 @@
+@model ServiceUpdateDto
+@{
+    ViewData["Title"] = "ServiceUpdate";
+    Layout = "_LayoutAdmin";
+}
+
+<form asp-controller="Service" asp-action="ServiceUpdate" method="post">
+    <h3>SERVİS GÜNCELLE</h3>
+    <hr>
+    <input type="hidden" asp-for="ServiceId">
+    <div class="form-group">
+        <label>Başlık</label>
+        <input type="text" asp-for="ServiceTitle" class="form-control">
+        <span asp-validation-for="ServiceTitle" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Açıklama</label>
+        <input type="text" asp-for="ServiceDescription" class="form-control">
+        <span asp-validation-for="ServiceDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Resim</label>
+        <input type="text" asp-for="ServiceImage" class="form-control">
+        <span asp-validation-for="ServiceImage" class="text-danger"></span>
+    </div>
+    <hr>
+    <button type="submit" class="btn btn-warning">Kaydet</button>
+    <a class="btn btn-outline-dark" asp-controller="Service" asp-action="ServiceList">Geri</a>
+</form>

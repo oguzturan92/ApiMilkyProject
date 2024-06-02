@@ -1,0 +1,37 @@
+@model List<ServiceResultDto>
+@{
+    ViewData["Title"] = "ServiceList";
+    Layout = "_LayoutAdmin";
+    int count = 0;
+}
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-bordered">
+        <h3>SERVİS LİSTESİ</h3>
+        <hr>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Başlık</th>
+                <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>@count</td>
+                    <td>@item.ServiceTitle</td>
+                    <td><a class="btn btn-outline-warning" asp-controller="Service" asp-action="ServiceUpdate" asp-route-id="@item.ServiceId">Güncelle</a></td>
+                    <td><a class="btn btn-outline-danger" asp-controller="Service" asp-action="ServiceDelete" asp-route-id="@item.ServiceId">Sil</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else
+{
+    <div class="alert alert-warning">Kayıt bulunmuyor</div>
+}
+<a class="btn btn-outline-info" asp-controller="Service" asp-action="ServiceCreate">Yeni Oluştur</a>

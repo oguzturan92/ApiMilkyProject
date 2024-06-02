@@ -1,0 +1,13 @@
+@model List<SiteSocialMediaResultDto>
+
+<style>
+    .headericon i
+    {
+        color: #fff!important;
+    }
+</style>
+
+@foreach (var item in Model)
+{
+    <a class="btn btn-link text-light headericon" target="_blank" href="@item.SiteSocialMediaLink">@Html.Raw(item.SiteSocialMediaIcon)</a>
+}

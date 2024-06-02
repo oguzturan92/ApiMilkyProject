@@ -1,0 +1,70 @@
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center py-5">
+            <h1 class="display-3 text-white mb-4 animated slideInDown">İletişim</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">İletişim</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Contact Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <p class="section-title bg-white text-center text-primary px-3">İLETİŞİM</p>
+                <h1 class="mb-5">Herhangi Bir Sorunuz Varsa Lütfen Bize Ulaşın</h1>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <h3 class="mb-4">İletişim Formumuz</h3>
+                    <form asp-controller="Message" asp-action="MessageCreate" method="post">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input name="MessageFullname" type="text" class="form-control" id="name" placeholder="Ad Soyad" required>
+                                    <label for="name">Ad Soyad</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input name="MessageMail" type="email" class="form-control" id="email" placeholder="Email" required>
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input name="MessageSubject" type="text" class="form-control" id="subject" placeholder="Konu" required>
+                                    <label for="subject">Konu</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea name="MessageContent" class="form-control" placeholder="Mesaj" id="message" style="height: 250px" required></textarea>
+                                    <label for="message">Mesaj</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-secondary rounded-pill py-3 px-5" type="submit">Gönder</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <h3 class="mb-4">İletişim Bilgilerimiz</h3>
+                    @await Component.InvokeAsync("Address")
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->

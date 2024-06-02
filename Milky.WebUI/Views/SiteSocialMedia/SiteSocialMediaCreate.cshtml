@@ -1,0 +1,23 @@
+@model SiteSocialMediaCreateDto
+@{
+    ViewData["Title"] = "SiteSocialMediaCreate";
+    Layout = "_LayoutAdmin";
+}
+
+<form asp-controller="SiteSocialMedia" asp-action="SiteSocialMediaCreate" method="post">
+    <h3>SİTE SOSYAL MEDYA EKLE</h3>
+    <hr>
+    <div class="form-group">
+        <label>Link</label>
+        <input type="text" asp-for="SiteSocialMediaLink" class="form-control">
+        <span asp-validation-for="SiteSocialMediaLink" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>İkon</label>
+        <input type="text" asp-for="SiteSocialMediaIcon" class="form-control">
+        <span asp-validation-for="SiteSocialMediaIcon" class="text-danger"></span>
+    </div>
+    <hr>
+    <button type="submit" class="btn btn-info">Kaydet</button>
+    <a class="btn btn-outline-dark" asp-controller="SiteSocialMedia" asp-action="SiteSocialMediaList">Geri</a>
+</form>

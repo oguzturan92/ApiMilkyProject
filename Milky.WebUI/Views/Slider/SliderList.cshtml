@@ -1,0 +1,37 @@
+@model List<SliderResultDto>
+@{
+    ViewData["Title"] = "SliderList";
+    Layout = "_LayoutAdmin";
+    int count = 0;
+}
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-bordered">
+        <h3>SLİDER LİSTESİ</h3>
+        <hr>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Başlık</th>
+                <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>@count</td>
+                    <td>@item.SliderTitle</td>
+                    <td><a class="btn btn-outline-warning" asp-controller="Slider" asp-action="SliderUpdate" asp-route-id="@item.SliderId">Güncelle</a></td>
+                    <td><a class="btn btn-outline-danger" asp-controller="Slider" asp-action="SliderDelete" asp-route-id="@item.SliderId">Sil</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else
+{
+    <div class="alert alert-warning">Kayıt bulunmuyor</div>
+}
+<a class="btn btn-outline-info" asp-controller="Slider" asp-action="SliderCreate">Yeni Oluştur</a>

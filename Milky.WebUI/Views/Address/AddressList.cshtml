@@ -1,0 +1,37 @@
+@model List<AddressResultDto>
+@{
+    ViewData["Title"] = "AddressList";
+    Layout = "_LayoutAdmin";
+    int count = 0;
+}
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-bordered">
+        <h3>ADRES LİSTESİ</h3>
+        <hr>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Adres</th>
+                <th colspan="2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>@count</td>
+                    <td>@item.AddressContent</td>
+                    <td><a class="btn btn-outline-warning" asp-controller="Address" asp-action="AddressUpdate" asp-route-id="@item.AddressId">Güncelle</a></td>
+                    <td><a class="btn btn-outline-danger" asp-controller="Address" asp-action="AddressDelete" asp-route-id="@item.AddressId">Sil</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else
+{
+    <div class="alert alert-warning">Kayıt bulunmuyor</div>
+}
+<a class="btn btn-outline-info" asp-controller="Address" asp-action="AddressCreate">Yeni Oluştur</a>

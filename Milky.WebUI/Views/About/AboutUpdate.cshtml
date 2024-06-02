@@ -1,0 +1,39 @@
+@model AboutUpdateDto
+@{
+    ViewData["Title"] = "AboutUpdate";
+    Layout = "_LayoutAdmin";
+}
+
+<form asp-controller="About" asp-action="AboutUpdate" method="post">
+    <h3>HAKKIMIZDA GÜNCELLE</h3>
+    <hr>
+    <input type="hidden" asp-for="AboutId">
+    <div class="form-group">
+        <label>Başlık</label>
+        <input type="text" asp-for="AboutTitle" class="form-control">
+        <span asp-validation-for="AboutTitle" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Açıklama</label>
+        <input type="text" asp-for="AboutDescription" class="form-control">
+        <span asp-validation-for="AboutDescription" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Resim 1</label>
+        <input type="text" asp-for="AboutImage1" class="form-control">
+        <span asp-validation-for="AboutImage1" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Resim 2</label>
+        <input type="text" asp-for="AboutImage2" class="form-control">
+        <span asp-validation-for="AboutImage2" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Resim 3</label>
+        <input type="text" asp-for="AboutImage3" class="form-control">
+        <span asp-validation-for="AboutImage3" class="text-danger"></span>
+    </div>
+    <hr>
+    <button type="submit" class="btn btn-warning">Kaydet</button>
+    <a class="btn btn-outline-dark" asp-controller="About" asp-action="AboutList">Geri</a>
+</form>
