@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Milky.Entity\Milky.Entity.csproj" />
     <ProjectReference Include="..\Milky.Data\Milky.Data.csproj" />
+    <ProjectReference Include="..\Milky.Dto\Milky.Dto.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
