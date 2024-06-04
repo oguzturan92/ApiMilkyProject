@@ -1,6 +1,6 @@
 
 # Kullanılan Özellikler
--Api
+-WebApi
 -AutoMapper
 -Identity
 -Repository
