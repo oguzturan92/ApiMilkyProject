@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Milky.WebUI.Validation.SubscribeValidations;
 using Milky.WebUI.Dtos.SubscribeDtos;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Milky.WebUI.Controllers
 {
+    [Authorize]
     public class SubscribeController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -22,7 +24,7 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> SubscribeList()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseSubscribe = await client.GetAsync("https://localhost:7155/api/Subscribe");
+            var responseSubscribe = await client.GetAsync("https://localhost:7171/api/Subscribe");
             if (responseSubscribe.IsSuccessStatusCode)
             {
                 var jsonData = await responseSubscribe.Content.ReadAsStringAsync();
@@ -33,12 +35,14 @@ namespace Milky.WebUI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult SubscribeCreate()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> SubscribeCreate(SubscribeCreateDto model)
         {
             CreateSubscribeDtoValidator validationRules = new CreateSubscribeDtoValidator();
@@ -49,7 +53,7 @@ namespace Milky.WebUI.Controllers
                 var client = _httpClientFactory.CreateClient();
                 var jsonData = JsonConvert.SerializeObject(model);
                 StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                var responseSubscribe = await client.PostAsync("https://localhost:7155/api/Subscribe", stringContent);
+                var responseSubscribe = await client.PostAsync("https://localhost:7171/api/Subscribe", stringContent);
                 if (responseSubscribe.IsSuccessStatusCode)
                 {
                     TempData["icon"] = "success";
@@ -70,7 +74,7 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> SubscribeDelete(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseSubscribe = await client.DeleteAsync("https://localhost:7155/api/Subscribe?id=" + id);
+            var responseSubscribe = await client.DeleteAsync("https://localhost:7171/api/Subscribe?id=" + id);
             if (responseSubscribe.IsSuccessStatusCode)
             {
                 return RedirectToAction("SubscribeList", "Subscribe");

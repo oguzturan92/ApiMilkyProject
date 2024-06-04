@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Milky.Entity.Concrete;
 using MilkyProject.Data.Abstract;
-using MilkyProject.Entity.Concrete;
 
 namespace MilkyProject.Data.Concrete.EfCore
 {

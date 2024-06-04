@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Milky.Entity.Concrete;
 using MilkyProject.Business.Abstract;
-using MilkyProject.Entity.Concrete;
 
 namespace MilkyProject.WebApi.Controllers
 {

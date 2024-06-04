@@ -1,4 +1,7 @@
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Milky.Entity.Concrete;
 using MilkyProject.Business.Abstract;
 using MilkyProject.Business.Concrete;
 using MilkyProject.Data.Abstract;
@@ -6,8 +9,10 @@ using MilkyProject.Data.Concrete.EfCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews()
-    .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+    builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddDefaultTokenProviders();
+
+    builder.Services.AddControllersWithViews()
+        .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 // Add services to the container.
 
@@ -49,6 +54,9 @@ builder.Services.AddControllersWithViews()
 
     builder.Services.AddScoped<ISubscribeService,SubscribeManager>();
     builder.Services.AddScoped<ISubscribeDal,SubscribeDal>();
+
+    // AutoMapper ---------------------------------------
+    builder.Services.AddAutoMapper(typeof(Program));
 
 
 builder.Services.AddControllers();

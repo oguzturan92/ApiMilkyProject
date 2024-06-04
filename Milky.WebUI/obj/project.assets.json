@@ -738,6 +738,9 @@
       "Milky.Dto/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Milky.Entity": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Milky.Dto.dll": {}
         },
@@ -2130,6 +2133,7 @@
     "net6.0": [
       "FluentValidation >= 11.9.1",
       "FluentValidation.AspNetCore >= 11.3.0",
+      "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.0",
       "Milky.Business >= 1.0.0",
       "Milky.Data >= 1.0.0",
       "Milky.Entity >= 1.0.0",
@@ -2194,6 +2198,10 @@
           "FluentValidation.AspNetCore": {
             "target": "Package",
             "version": "[11.3.0, )"
+          },
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[6.0.0, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",

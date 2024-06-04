@@ -1,7 +1,27 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Milky.Entity.Concrete;
+using MilkyProject.Data.Concrete.EfCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+    builder.Services.AddDbContext<Context>();
+    builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddDefaultTokenProviders();
+
+    builder.Services.ConfigureApplicationCookie(options => {
+        options.LoginPath = "/User/UserLogin";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+        options.Cookie = new CookieBuilder
+        {
+            HttpOnly = true,
+            Name = ".milky.Security.Cookie",
+            SameSite = SameSiteMode.Strict
+        };
+    });
 
     // Client oluşturmak için
     builder.Services.AddHttpClient();
@@ -20,6 +40,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+    app.UseAuthentication(); // Identity
 
 app.UseAuthorization();
 

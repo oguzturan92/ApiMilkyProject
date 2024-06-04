@@ -32,6 +32,7 @@ namespace Milky.WebApi.Controllers
                         UserRegisterDate = DateTime.Now,
                         Email = userRegisterDto.Email,
                         UserName = userRegisterDto.UserName,
+                        EmailConfirmed = true
                     };
 
                     var createUser = await _userManager.CreateAsync(user, userRegisterDto.Password);
@@ -50,30 +51,30 @@ namespace Milky.WebApi.Controllers
             return Ok();
         }
 
-        // [HttpPost("UserLogin")]
-        // public async Task<IActionResult> UserLogin(CreateLoginDto createLoginDto)
-        // {
-        //     var user = await _userManager.FindByEmailAsync(createLoginDto.Email);
-        //     var loginuser = await _signInManager.PasswordSignInAsync(user.UserName, createLoginDto.Password, false, false);
-        //     if(loginuser.Succeeded)
-        //     {
-        //         return Ok(loginuser);
-        //     }
-        //     else
-        //     {
-        //         var result = new LoginErrorViewModel()
-        //         {
-        //             Error = "Kullanıcı adı veya şifre hatalı!!"
-        //         };
-        //         return BadRequest(result);
-        //     }
-        // }
+        [HttpPost("UserLogin")]
+        public async Task<IActionResult> UserLogin(UserLoginDto userLoginDto)
+        {
+            var user = await _userManager.FindByEmailAsync(userLoginDto.Email);
+            if (user == null)
+            {
+                return BadRequest("Kullanıcı adı veya şifre hatalı");
+            }
+            var userLogin = await _signInManager.PasswordSignInAsync(user, userLoginDto.Password, false, false);
+            if(userLogin.Succeeded)
+            {
+                return Ok("Giriş başarılı");
+            }
+            else
+            {
+                return BadRequest("Kullanıcı adı veya şifre hatalı");
+            }
+        }
 
         [HttpGet("UserLogout")]
         public async Task<IActionResult> UserLogout(int id)
         {
             await _signInManager.SignOutAsync();
-            return Ok();
+            return Ok("Çıkış yapıldı");
         }
     }
 }

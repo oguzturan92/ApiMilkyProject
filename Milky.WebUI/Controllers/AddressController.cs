@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Milky.WebUI.Validation.AddressValidations;
 using Milky.WebUI.Dtos.AddressDtos;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Milky.WebUI.Controllers
 {
+    [Authorize]
     public class AddressController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -22,7 +24,7 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> AddressList()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7155/api/Address");
+            var responseMessage = await client.GetAsync("https://localhost:7171/api/Address");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -48,7 +50,7 @@ namespace Milky.WebUI.Controllers
                 var client = _httpClientFactory.CreateClient();
                 var jsonData = JsonConvert.SerializeObject(model);
                 StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                var responseMessage = await client.PostAsync("https://localhost:7155/api/Address", stringContent);
+                var responseMessage = await client.PostAsync("https://localhost:7171/api/Address", stringContent);
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     return RedirectToAction("AddressList", "Address");
@@ -68,7 +70,7 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> AddressUpdate(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7155/api/Address/AddressGet?id=" + id);
+            var responseMessage = await client.GetAsync("https://localhost:7171/api/Address/AddressGet?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -88,7 +90,7 @@ namespace Milky.WebUI.Controllers
                 var client = _httpClientFactory.CreateClient();
                 var jsonData = JsonConvert.SerializeObject(model);
                 StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                var responseMessage = await client.PutAsync("https://localhost:7155/api/Address", stringContent);
+                var responseMessage = await client.PutAsync("https://localhost:7171/api/Address", stringContent);
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     return RedirectToAction("AddressList", "Address");
@@ -107,7 +109,7 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> AddressDelete(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync("https://localhost:7155/api/Address?id=" + id);
+            var responseMessage = await client.DeleteAsync("https://localhost:7171/api/Address?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("AddressList", "Address");
@@ -115,11 +117,5 @@ namespace Milky.WebUI.Controllers
             return RedirectToAction("AddressList", "Address");
         }
 
-        // CLIENT
-        public IActionResult Index()
-        {
-            ViewBag.aboutActive = "active";
-            return View();
-        }
     }
 }

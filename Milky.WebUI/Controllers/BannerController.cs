@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Milky.WebUI.Validation.BannerValidations;
 using Milky.WebUI.Dtos.BannerDtos;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Milky.WebUI.Controllers
 {
+    [Authorize]
     public class BannerController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -22,7 +24,7 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> BannerList()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7155/api/Banner");
+            var responseMessage = await client.GetAsync("https://localhost:7171/api/Banner");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -48,7 +50,7 @@ namespace Milky.WebUI.Controllers
                 var client = _httpClientFactory.CreateClient();
                 var jsonData = JsonConvert.SerializeObject(model);
                 StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                var responseMessage = await client.PostAsync("https://localhost:7155/api/Banner", stringContent);
+                var responseMessage = await client.PostAsync("https://localhost:7171/api/Banner", stringContent);
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     return RedirectToAction("BannerList", "Banner");
@@ -68,7 +70,7 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> BannerUpdate(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7155/api/Banner/BannerGet?id=" + id);
+            var responseMessage = await client.GetAsync("https://localhost:7171/api/Banner/BannerGet?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -88,7 +90,7 @@ namespace Milky.WebUI.Controllers
                 var client = _httpClientFactory.CreateClient();
                 var jsonData = JsonConvert.SerializeObject(model);
                 StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                var responseMessage = await client.PutAsync("https://localhost:7155/api/Banner", stringContent);
+                var responseMessage = await client.PutAsync("https://localhost:7171/api/Banner", stringContent);
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     return RedirectToAction("BannerList", "Banner");
@@ -107,19 +109,13 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> BannerDelete(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync("https://localhost:7155/api/Banner?id=" + id);
+            var responseMessage = await client.DeleteAsync("https://localhost:7171/api/Banner?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("BannerList", "Banner");
             }
             return RedirectToAction("BannerList", "Banner");
         }
-
-        // CLIENT
-        public IActionResult Index()
-        {
-            ViewBag.aboutActive = "active";
-            return View();
-        }
+        
     }
 }

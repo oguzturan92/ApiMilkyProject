@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Milky.WebUI.Validation.ProductValidations;
 using Milky.WebUI.Dtos.ProductDtos;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Milky.WebUI.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -22,7 +24,7 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> ProductList()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7155/api/Product");
+            var responseMessage = await client.GetAsync("https://localhost:7171/api/Product");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -48,7 +50,7 @@ namespace Milky.WebUI.Controllers
                 var client = _httpClientFactory.CreateClient();
                 var jsonData = JsonConvert.SerializeObject(model);
                 StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                var responseMessage = await client.PostAsync("https://localhost:7155/api/Product", stringContent);
+                var responseMessage = await client.PostAsync("https://localhost:7171/api/Product", stringContent);
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     return RedirectToAction("ProductList", "Product");
@@ -68,7 +70,7 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> ProductUpdate(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7155/api/Product/ProductGet?id=" + id);
+            var responseMessage = await client.GetAsync("https://localhost:7171/api/Product/ProductGet?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -88,7 +90,7 @@ namespace Milky.WebUI.Controllers
                 var client = _httpClientFactory.CreateClient();
                 var jsonData = JsonConvert.SerializeObject(model);
                 StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                var responseMessage = await client.PutAsync("https://localhost:7155/api/Product", stringContent);
+                var responseMessage = await client.PutAsync("https://localhost:7171/api/Product", stringContent);
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     return RedirectToAction("ProductList", "Product");
@@ -107,7 +109,7 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> ProductDelete(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync("https://localhost:7155/api/Product?id=" + id);
+            var responseMessage = await client.DeleteAsync("https://localhost:7171/api/Product?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("ProductList", "Product");
@@ -115,11 +117,5 @@ namespace Milky.WebUI.Controllers
             return RedirectToAction("ProductList", "Product");
         }
 
-        // CLIENT
-        public IActionResult Index()
-        {
-            ViewBag.aboutActive = "active";
-            return View();
-        }
     }
 }

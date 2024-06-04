@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Milky.WebUI.Validation.TeamValidations;
 using Milky.WebUI.Dtos.TeamDtos;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Milky.WebUI.Controllers
 {
+    [Authorize]
     public class TeamController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -22,7 +24,7 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> TeamList()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7155/api/Team");
+            var responseMessage = await client.GetAsync("https://localhost:7171/api/Team");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -48,7 +50,7 @@ namespace Milky.WebUI.Controllers
                 var client = _httpClientFactory.CreateClient();
                 var jsonData = JsonConvert.SerializeObject(model);
                 StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                var responseMessage = await client.PostAsync("https://localhost:7155/api/Team", stringContent);
+                var responseMessage = await client.PostAsync("https://localhost:7171/api/Team", stringContent);
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     return RedirectToAction("TeamList", "Team");
@@ -68,7 +70,7 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> TeamUpdate(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7155/api/Team/TeamGet?id=" + id);
+            var responseMessage = await client.GetAsync("https://localhost:7171/api/Team/TeamGet?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -88,7 +90,7 @@ namespace Milky.WebUI.Controllers
                 var client = _httpClientFactory.CreateClient();
                 var jsonData = JsonConvert.SerializeObject(model);
                 StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                var responseMessage = await client.PutAsync("https://localhost:7155/api/Team", stringContent);
+                var responseMessage = await client.PutAsync("https://localhost:7171/api/Team", stringContent);
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     return RedirectToAction("TeamList", "Team");
@@ -107,7 +109,7 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> TeamDelete(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync("https://localhost:7155/api/Team?id=" + id);
+            var responseMessage = await client.DeleteAsync("https://localhost:7171/api/Team?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("TeamList", "Team");
@@ -115,11 +117,5 @@ namespace Milky.WebUI.Controllers
             return RedirectToAction("TeamList", "Team");
         }
 
-        // CLIENT
-        public IActionResult Index()
-        {
-            ViewBag.aboutActive = "active";
-            return View();
-        }
     }
 }

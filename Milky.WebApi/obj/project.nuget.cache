@@ -1,13 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "awQbD4YR5yTVIkYHG3O/Hfk4HDYoB6K5rxzN8FROOx5xOQKqaPK/YNaaUqZWrjVnEj+OzxAzNPzyArDv6p4iuQ==",
+  "dgSpecHash": "LeqVtrLMRd8Z0pf5OWG8FMcCnU8OBZpz8xDtFhkDAIb/sgdy8RY8noSorIVljtWWRQd++0acpBfHDuq8qR7GhQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\proje\\ApiMilky\\Milky.WebApi\\Milky.WebApi.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\oğuzhan\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\oğuzhan\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\oğuzhan\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.0\\microsoft.aspnetcore.cryptography.internal.6.0.0.nupkg.sha512",
     "C:\\Users\\oğuzhan\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.0\\microsoft.aspnetcore.cryptography.keyderivation.6.0.0.nupkg.sha512",
     "C:\\Users\\oğuzhan\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.0\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.0.nupkg.sha512",
-    "C:\\Users\\oğuzhan\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\oğuzhan\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\oğuzhan\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\oğuzhan\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\oğuzhan\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.0\\microsoft.entityframeworkcore.6.0.0.nupkg.sha512",

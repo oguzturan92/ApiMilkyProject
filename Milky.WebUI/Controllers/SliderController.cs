@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Milky.WebUI.Validation.SliderValidation;
 using Milky.WebUI.Dtos.SliderDtos;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MilkyProject.WebUI.Controllers
 {
+    [Authorize]
     public class SliderController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -22,7 +24,7 @@ namespace MilkyProject.WebUI.Controllers
         public async Task<IActionResult> SliderList()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7155/api/Slider");
+            var responseMessage = await client.GetAsync("https://localhost:7171/api/Slider");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -48,7 +50,7 @@ namespace MilkyProject.WebUI.Controllers
                 var client = _httpClientFactory.CreateClient();
                 var jsonData = JsonConvert.SerializeObject(model);
                 StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                var responseMessage = await client.PostAsync("https://localhost:7155/api/Slider", stringContent);
+                var responseMessage = await client.PostAsync("https://localhost:7171/api/Slider", stringContent);
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     return RedirectToAction("SliderList", "Slider");
@@ -69,7 +71,7 @@ namespace MilkyProject.WebUI.Controllers
         public async Task<IActionResult> SliderUpdate(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7155/api/Slider/SliderGet?id=" + id);
+            var responseMessage = await client.GetAsync("https://localhost:7171/api/Slider/SliderGet?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -89,7 +91,7 @@ namespace MilkyProject.WebUI.Controllers
                 var client = _httpClientFactory.CreateClient();
                 var jsonData = JsonConvert.SerializeObject(model);
                 StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                var responseMessage = await client.PutAsync("https://localhost:7155/api/Slider", stringContent);
+                var responseMessage = await client.PutAsync("https://localhost:7171/api/Slider", stringContent);
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     return RedirectToAction("SliderList", "Slider");
@@ -109,7 +111,7 @@ namespace MilkyProject.WebUI.Controllers
         public async Task<IActionResult> SliderDelete(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync("https://localhost:7155/api/Slider?id=" + id);
+            var responseMessage = await client.DeleteAsync("https://localhost:7171/api/Slider?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("SliderList", "Slider");

@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Milky.WebUI.Validation.SocialMediaValidations;
 using Milky.WebUI.Dtos.SocialMediaDtos;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Milky.WebUI.Controllers
 {
+    [Authorize]
     public class SocialMediaController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -23,7 +25,7 @@ namespace Milky.WebUI.Controllers
         {
             ViewBag.teamId = id;
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7155/api/SocialMedia/SocialMediaListByTeamId/" + id);
+            var responseMessage = await client.GetAsync("https://localhost:7171/api/SocialMedia/SocialMediaListByTeamId/" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -53,7 +55,7 @@ namespace Milky.WebUI.Controllers
                 var client = _httpClientFactory.CreateClient();
                 var jsonData = JsonConvert.SerializeObject(model);
                 StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                var responseMessage = await client.PostAsync("https://localhost:7155/api/SocialMedia", stringContent);
+                var responseMessage = await client.PostAsync("https://localhost:7171/api/SocialMedia", stringContent);
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     return RedirectToAction("SocialMediaList", "SocialMedia", new { id = model.TeamId});
@@ -73,7 +75,7 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> SocialMediaUpdate(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7155/api/SocialMedia/SocialMediaGet?id=" + id);
+            var responseMessage = await client.GetAsync("https://localhost:7171/api/SocialMedia/SocialMediaGet?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -93,7 +95,7 @@ namespace Milky.WebUI.Controllers
                 var client = _httpClientFactory.CreateClient();
                 var jsonData = JsonConvert.SerializeObject(model);
                 StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                var responseMessage = await client.PutAsync("https://localhost:7155/api/SocialMedia", stringContent);
+                var responseMessage = await client.PutAsync("https://localhost:7171/api/SocialMedia", stringContent);
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     return RedirectToAction("SocialMediaList", "SocialMedia", new { id = model.TeamId});
@@ -112,7 +114,7 @@ namespace Milky.WebUI.Controllers
         public async Task<IActionResult> SocialMediaDelete(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync("https://localhost:7155/api/SocialMedia?id=" + id);
+            var responseMessage = await client.DeleteAsync("https://localhost:7171/api/SocialMedia?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("SocialMediaList", "SocialMedia");
@@ -120,11 +122,5 @@ namespace Milky.WebUI.Controllers
             return RedirectToAction("SocialMediaList", "SocialMedia");
         }
 
-        // CLIENT
-        public IActionResult Index()
-        {
-            ViewBag.aboutActive = "active";
-            return View();
-        }
     }
 }

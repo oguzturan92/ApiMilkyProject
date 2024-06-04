@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Milky.Dto.AddressDtos;
 using Milky.Entity.Concrete;
 using MilkyProject.Business.Abstract;
-using MilkyProject.Entity.Concrete;
 
 namespace MilkyProject.WebApi.Controllers
 {
@@ -14,10 +15,12 @@ namespace MilkyProject.WebApi.Controllers
     public class AddressController : ControllerBase
     {
         private readonly IAddressService _addressService;
+        private readonly IMapper _mapper;
 
-        public AddressController(IAddressService addressService)
+        public AddressController(IAddressService addressService, IMapper mapper)
         {
             _addressService = addressService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -35,17 +38,27 @@ namespace MilkyProject.WebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddressCreate(Address address)
+        public IActionResult AddressCreate(AddressCreateDto addressCreateDto)
         {
-            _addressService.Insert(address);
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                var values = _mapper.Map<Address>(addressCreateDto);
+                _addressService.Insert(values);
+                return Ok();
+            }
+            return BadRequest();
         }
 
         [HttpPut]
-        public IActionResult AddressUpdate(Address address)
+        public IActionResult AddressUpdate(AddressUpdateDto addressUpdateDto)
         {
-            _addressService.Update(address);
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                var values = _mapper.Map<Address>(addressUpdateDto);
+                _addressService.Update(values);
+                return Ok();
+            }
+            return BadRequest();
         }
 
         [HttpDelete]

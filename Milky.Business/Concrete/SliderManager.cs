@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Milky.Entity.Concrete;
 using MilkyProject.Business.Abstract;
 using MilkyProject.Data.Abstract;
-using MilkyProject.Entity.Concrete;
 
 namespace MilkyProject.Business.Concrete
 {

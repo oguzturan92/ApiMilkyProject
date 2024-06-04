@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MilkyProject.Entity.Concrete
+namespace Milky.Entity.Concrete
 {
     public class Slider
     {

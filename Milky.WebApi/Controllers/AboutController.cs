@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Milky.Dto.AboutDtos;
 using Milky.Entity.Concrete;
 using MilkyProject.Business.Abstract;
 
@@ -13,10 +15,12 @@ namespace MilkyProject.WebApi.Controllers
     public class AboutController : ControllerBase
     {
         private readonly IAboutService _aboutService;
+        private readonly IMapper _mapper;
 
-        public AboutController(IAboutService aboutService)
+        public AboutController(IAboutService aboutService, IMapper mapper)
         {
             _aboutService = aboutService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -34,17 +38,27 @@ namespace MilkyProject.WebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult AboutCreate(About about)
+        public IActionResult AboutCreate(AboutCreateDto aboutCreateDto)
         {
-            _aboutService.Insert(about);
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                var values = _mapper.Map<About>(aboutCreateDto);
+                _aboutService.Insert(values);
+                return Ok();
+            }
+            return BadRequest();
         }
 
         [HttpPut]
-        public IActionResult AboutUpdate(About about)
+        public IActionResult AboutUpdate(AboutUpdateDto aboutUpdateDto)
         {
-            _aboutService.Update(about);
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                var values = _mapper.Map<About>(aboutUpdateDto);
+                _aboutService.Update(values);
+                return Ok();
+            }
+            return BadRequest();
         }
 
         [HttpDelete]

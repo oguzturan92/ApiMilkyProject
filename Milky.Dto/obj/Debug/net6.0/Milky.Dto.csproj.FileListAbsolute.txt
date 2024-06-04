@@ -1,0 +1,15 @@
+C:\Users\proje\ApiMilky\Milky.Dto\bin\Debug\net6.0\Milky.Dto.deps.json
+C:\Users\proje\ApiMilky\Milky.Dto\bin\Debug\net6.0\Milky.Dto.dll
+C:\Users\proje\ApiMilky\Milky.Dto\bin\Debug\net6.0\ref\Milky.Dto.dll
+C:\Users\proje\ApiMilky\Milky.Dto\bin\Debug\net6.0\Milky.Dto.pdb
+C:\Users\proje\ApiMilky\Milky.Dto\obj\Debug\net6.0\Milky.Dto.csproj.AssemblyReference.cache
+C:\Users\proje\ApiMilky\Milky.Dto\obj\Debug\net6.0\Milky.Dto.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\proje\ApiMilky\Milky.Dto\obj\Debug\net6.0\Milky.Dto.AssemblyInfoInputs.cache
+C:\Users\proje\ApiMilky\Milky.Dto\obj\Debug\net6.0\Milky.Dto.AssemblyInfo.cs
+C:\Users\proje\ApiMilky\Milky.Dto\obj\Debug\net6.0\Milky.Dto.csproj.CoreCompileInputs.cache
+C:\Users\proje\ApiMilky\Milky.Dto\obj\Debug\net6.0\Milky.Dto.dll
+C:\Users\proje\ApiMilky\Milky.Dto\obj\Debug\net6.0\ref\Milky.Dto.dll
+C:\Users\proje\ApiMilky\Milky.Dto\obj\Debug\net6.0\Milky.Dto.pdb
+C:\Users\proje\ApiMilky\Milky.Dto\bin\Debug\net6.0\Milky.Entity.dll
+C:\Users\proje\ApiMilky\Milky.Dto\bin\Debug\net6.0\Milky.Entity.pdb
+C:\Users\proje\ApiMilky\Milky.Dto\obj\Debug\net6.0\Milky.Dto.csproj.CopyComplete
